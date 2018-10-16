@@ -14,10 +14,10 @@ typedef struct linked_list {
 
 typedef struct linked_list_ops {
 	void * (* insert_beg) (void *,void *);
-	void * (* insert_mid) (void *,int (*)(void *),void *);
-	void * (* insert_end) (void *,int (*)(void *));
+	void * (* insert_mid) (void *,void *,int);
+	void * (* insert_end) (void *,void * );
 	void * (* delete_beg) (void *);
-	void * (* delete_mid) (void *,int (*)(void *));
+	void * (* delete_mid) (void *,void *,int );
 	void * (* delete_end) (void *);
 	void * (* reverse) (void *);
 	void (*display)(void *);
