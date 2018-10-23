@@ -48,12 +48,17 @@ printf("***************************************************************\n");\
 								fprintf(glog, "%s %s\t<%4d> " fmt,GetTime(),\
 										 __FILE__, __LINE__, __VA_ARGS__); }\
 							  }while (0);
-#else
+#elif 0
 #define PRINTF(fmt, ...)	do{\
 								 printf("%s\t<%4d> " fmt ,\
 									__FILE__,__LINE__,__VA_ARGS__);\
 								\
 								fprintf(glog,"%s %s\t<%4d> " fmt ,GetTime() ,\
+									__FILE__,__LINE__,__VA_ARGS__);\
+							  }while (0);
+#else
+#define PRINTF(fmt, ...)	do{\
+								 printf("%s\t<%4d> " fmt ,\
 									__FILE__,__LINE__,__VA_ARGS__);\
 							  }while (0);
 #endif

@@ -39,6 +39,7 @@ void execute_on_ptr() {
 	printf("add:%d sub:%d\n",a,b);
 }
 
+#if 0
 int main() {
 	printf("Hello\n");
 	execute_on_var();
@@ -47,3 +48,4 @@ int main() {
 return 0;
 
 }
+#endif

@@ -17,8 +17,8 @@ typedef struct linked_list_ops {
 	void * (* insert_mid) (void *,void *,int);
 	void * (* insert_end) (void *,void * );
 	void * (* delete_beg) (void *);
-	void * (* delete_mid) (void *,void *,int );
+	void * (* delete_mid) (void *,int );
 	void * (* delete_end) (void *);
 	void * (* reverse) (void *);
-	void (*display)(void *);
+	void * (*display)(void *);
 }ll_ops_t;
