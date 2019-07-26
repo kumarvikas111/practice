@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include <utills.h>
+//#include <utills.h>
+
+#define SQ(X) (X)*(X)
 
 
 int add_int(int a, int b) {
@@ -17,9 +19,9 @@ typedef struct arops{
 
 void execute_on_var() {
 	arops ops ={
-							 .add = add_int,
-							 .sub = sub_int,
-						};
+		.add = add_int,
+		.sub = sub_int,
+	};
 
 	int a = ops.add(3,4);
 	int b = ops.sub(4,3);
@@ -39,13 +41,29 @@ void execute_on_ptr() {
 	printf("add:%d sub:%d\n",a,b);
 }
 
-#if 0
 int main() {
+
 	printf("Hello\n");
+#if 0
 	execute_on_var();
 	execute_on_ptr();
-
-return 0;
+#endif
+	int x = 3;
+	printf("SQ=%d\n",SQ(++x));
+	int y = 20;
+	x = 10;
+	x = !x;
+	y = !y;
+	printf("%d expr (x=!x)X=%d (y=!y) y=%d\n",__LINE__,x,y);
+	y=!x && !y;
+	printf("%d X=%d y=%d\n",__LINE__,x,y);
+	char b = 0xFF;
+	x=0xFFFFFFFF;
+	b =b+1;
+	printf("%d b=%d x=%d x+2: %d\n",__LINE__,b,x,(x+2));
+	b= b+1;
+	printf("%d b=%d \n",__LINE__,b);
+	return 0;
 
 }
-#endif
+

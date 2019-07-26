@@ -24,13 +24,27 @@ static int compile_regex (regex_t * r, const char * regex_text)
 	return 0;
 }
 
+static compile_srev(char * s){
+	char * start = s;
+	char * left = s;
+	char ch;
+	while(*s++){
+		s-=2;
+	}
+
+	while(left < s){
+		ch = *left;
+	  left++ = *s;
+		*s-- = ch;
+	}
+	return start;
+}
 /*
 	 Match the string in "to_match" against the compiled regular
 	 expression in "r".
  */
 
-static int match_regex (regex_t * r, const char * to_match)
-{
+static int match_regex (regex_t * r, const char * to_match){
 	/* "P" is a pointer into the string which points to the end of the
 		 previous match. */
 	const char * p = to_match;
