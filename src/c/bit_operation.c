@@ -63,9 +63,37 @@ void diplay_binary(int a)
 	}
 	printf("%d", a % 2);
 }
+
+struct uart
+   {
+      unsigned baud : 3;
+      unsigned parity : 2;
+      unsigned unused : 2;
+      unsigned interrupt_enable : 1;
+   };
+
+unsigned *char dev_reg = (unsigned char *)0x80000000;
+class uart
+   {
+      unsigned char* port_address;
+   public:
+      uart(unsigned addr)
+      {
+         port_address = (unsigned char*)addr;
+      }
+      void set_parity(unsigned parity)
+      {
+         *port_address |= (parity << 3);
+      }
+   };
+
+  
 #if 0
 void main()
 {
+	 uart myuart(0x8000000);
+         myuart.set_parity(2);
+   
 	unsigned int n = 0xABCD98EF;
 	
 	printf("%d n: 0x%X\n", __LINE__, n);
