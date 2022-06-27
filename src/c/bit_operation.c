@@ -12,7 +12,7 @@
  */
 
 #define GET_MASK(M, N) ((1U << ((M) - (N))) - 1)
-
+// bit twiddle hacks-http://graphics.stanford.edu/~seander/bithacks.html
 /* 
  * Swap bits from i to j position for n consecative bits for given number.
  * i,j: position from where it start swapping.
