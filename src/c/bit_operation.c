@@ -63,6 +63,73 @@ void diplay_binary(int a)
 	}
 	printf("%d", a % 2);
 }
+int find_bit_pattern(void *memory_region, int msize, unsigned int bit_pat, int bit_pat_size){
+    if (NULL == memory_region){
+        return 0;
+    }
+    unsigned int mask = (1<<bit_pat_size)-1;
+    unsigned int window = 0;
+    unsigned int mem_shift_data = 0;
+    unsigned int carry =0;
+    unsigned int byte_index =0;
+    unsigned int j = 0;
+    unsigned int count = 0;
+    unsigned int * memory = (int *)memory_region;
+    printf("memory-%d: %X\n",0,((memory[0])));
+    printf("memory-%d: %X\n",1,((memory[1])));
+  
+    for(int i =0; i <msize*8;i++){
+       printf("memory-%d: %X:\t",byte_index,((memory[byte_index])));
+	   byte_index = i/(8*sizeof(int));
+	   //bit_shift_width = (i%(sizeof(int)*8);
+	   if ((i%(sizeof(int)*8)) > ((8*sizeof(int)) - bit_pat_size)){
+		   carry = mem_shift_data;
+		   printf("carry %d Skip\n",carry);
+		   continue;
+	   }
+	   mem_shift_data= (((memory[byte_index]))>>(i%(sizeof(int)*8)));
+	   if(carry){
+		   window = carry | (mem_shift_data <<(bit_pat_size + j -1) & mask) ;
+		   j++;
+		   carry = carry>>1;
+	   }else{
+		   window = mem_shift_data & mask;
+		   j = 0;
+	   }
+	   if(window == bit_pat){
+	       count++;
+	   }
+       printf("byte_index %d  window-%d:%X carry: %X bit_pat: %X count:%d\n", byte_index,i,window,carry,bit_pat,count);
+    }
+	return 0;
+}
+
+void slidingBitWindow(unsigned int num, int windowSize) {
+    unsigned int mask = (1 << windowSize) - 1;  // Create a mask for the window size
+    unsigned int window = 0;//num & mask;  // Initialize the window with the first bits
+    
+    printf("maks %x Window 1: %u\n",mask, window);
+
+    for (int i = 0 ; i < sizeof(unsigned int) * 8; i++) {
+        window = (num>>i) & mask;
+        
+        printf("window-%d: %x\n",i, window);
+        
+        
+    }
+}
+
+int main() {
+    //double num = 0b0101010101010101010101010101010101010101101011110010101010000000;
+    int num[2] ={0x55555555,0x55AF2A80};
+    int windowSize = 3;
+
+    //slidingBitWindow(num, windowSize);
+    find_bit_pattern(&num,8,0xF,4);
+    
+
+    return 0;
+}
 
 struct uart
    {
